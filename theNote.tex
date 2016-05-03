@@ -8,6 +8,9 @@
 % This package should properly format in-text
 % reference calls and reference-list numbers.
 \usepackage{cite}
+\usepackage{amsmath}
+\usepackage{lineno}
+\linenumbers
 
 % Use times if you have the font installed; otherwise, comment out the
 % following line.
@@ -109,8 +112,61 @@ Some abstract there. The first ridge discovery in p-p is here: Ref.~\cite{Khacha
 \end{abstract}
 
 \input{srcs/introduction}
-\section{ATLAS method}
-\section{CMS method}
+\section{ATLAS template fit method}
+
+A new template fit function is used by ATLAS~\cite{Aad:2015gqa} to extract elliptical flow harmonic $v_{2}$ from two-particle correlation in pp collisions, as 
+
+\begin{equation}
+\label{eq:ATLAStemplate}
+Y^{templ}(\Delta\phi) = F Y^{periph}(\Delta\phi) + Y^{ridge}(\Delta\phi),
+\end{equation}
+
+where
+
+\begin{equation}
+\label{eq:ATLAStemplateridge}
+Y^{ridge}(\Delta\phi) = G(1+2V_{2\Delta}^{fit}cos(2\Delta\phi)).
+\end{equation}
+
+Here $Y(\Delta\phi)$ is the 1D per-trigger-particle yield extracted from 2D correlation functions and 
+$V_{2\Delta}^{fit}$ is the collective flow signal extracted.
+The per-trigger-particle yield $Y(\Delta\phi)$ can be Fourier decomposed,
+
+\begin{equation}
+\label{eq:ATLASyieldVn}
+Y(\Delta\phi)  = N \left\{1+\sum\limits_{n} 2V_{n\Delta} \cos (n\Delta\phi)\right\}.
+\end{equation}
+
+Expand Eq.~\ref{eq:ATLAStemplate} using Fourier decomposition, relations between various variables can be extracted,
+
+\begin{equation}
+\label{eq:ATLASfit1}
+G = N - FN^{periph},
+\end{equation}
+
+\begin{linenomath}
+\begin{equation}
+\label{eq:ATLASfit2}
+GV_{n\Delta}^{fit} = NV_{n\Delta} - FN^{periph}V_{n\Delta}^{periph}.
+\end{equation}
+\end{linenomath}
+
+Previous ATLAS pPb analyses use the peripheral-subtraction method with the peripheral reference after applying the ZYAM procedure,
+i.e. $Y^{periph}(\Delta\phi) - Y^{periph}(0)$.
+The ZYAM procedure is similar to subtract out the 0th order term in the Fourier decomposition, $FN^{periph}$ in Eq.~\ref{eq:ATLASfit1},
+which explicitly forces $G$ to be equal to $N$. As $N$ represents the number of particle pairs involved in the correlation,
+$G = N$ implies that the extracted $V_{n\Delta}$ and $V_{n\Delta}^{fit}$ are from the same group of particles.
+A similar procedure has also been used by the CMS Collaboration~\cite{Chatrchyan:2013nka}.
+
+In ATLAS's new method, $G$ is required to be smaller than $N$, 
+which would indicate that $V_{n\Delta}^{fit}$ quantifies the correlation of a smaller set of particle pairs,
+although it is not clear how to distinguish sets of particles involved in collective correlation with those involved in few-body correlation.
+Therefore, comparison between anisotropy harmonics results is not meaningful as there is fundamental difference in the definition.
+%In particular, when applied to events with similar multiplicity as the peripheral reference, 
+%$V_{n\Delta}^{fit}$ quantifies correlation of very few particles, since $G$ is expected to be very small.
+
+
+%\section{CMS method}
 \input{srcs/summary}
 
 \bibliography{theNote}
